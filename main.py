@@ -12,7 +12,10 @@ RIOT_ID = os.getenv("RIOT_ID")
 TAGLINE = os.getenv("TAGLINE")
 
 def handle_api_error(response: requests.Response) -> None:
-    """ Gère les erreurs de l'API en fonction du code de statut de la réponse. """
+    """ 
+        Gère les erreurs de l'API en fonction du code de statut de la réponse.
+        À voir sur le site developer.riotgames
+    """
     
     if response.status_code == 200:
         return  # Pas d'erreur, succès.
