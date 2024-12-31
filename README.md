@@ -13,7 +13,7 @@ Généralement, la voie du top sont réservé pour les fighter. La voie du mid p
 
 ### La carte du jeu
 
-![alt text](https://www.lolvvv.com/blog/league-of-legends-maps)
+![Texte alternatif](images/summoners-rift.webp)
 
 ## Objectif du projet
 
