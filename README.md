@@ -10,7 +10,6 @@ Lorsque vous êtes en jeu, chaque joueur devront se diriger sur une "lane", qui 
 
 Généralement, la voie du top sont réservé pour les fighter. La voie du mid pour les slayers et mages. La voie du bot pour les marksman et controller/tank.
 
-
 ### La carte du jeu
 
 ![Texte alternatif](images/summoners-rift.webp)
@@ -18,3 +17,9 @@ Généralement, la voie du top sont réservé pour les fighter. La voie du mid p
 ## Objectif du projet
 
 L'objectif principal de ce projet sera de pouvoir prédire l'issue d'un match en fonction des valeurs du jeu à la 15e minute.
+
+## Acquisition de données
+
+Pour ce projet, j'ai deux options pour acquérir des données.
+
+![Texte alternatif](images/graph_data.png)
