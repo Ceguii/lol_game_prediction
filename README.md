@@ -42,3 +42,71 @@ Le site [Leaguepedia](https://lol.fandom.com/wiki/League_of_Legends_Esports_Wiki
 - Actualités et mises à jour
 
 Le site [Riot Games](https://developer.riotgames.com/apis) offre un API avec différents endpoints qu'on peut utiliser gratuitement. Il suffit de se crée un compte riot. De plus, Riot Games nous met à disposition la [documentation](https://riot-api-libraries.readthedocs.io/en/latest/collectingdata.html) sur le collecte de donnée.
+
+Après avoir crée notre compte riot, on devra générer un API key dans la partie espace personnel pour qu'on puisse enfin réaliser des requêtes.
+
+Nous allons tout d'abord se concentrer sur le [ACCOUNT-V1](https://developer.riotgames.com/apis), plus précisément sur l'endpoint **/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}** (Get account by riot id). Cette endpoint nous permettra d'obtenir un PUUID (Player Universally Unique Identifier), c'est un identifiant unique et universel attribué à chaque joueur de Riot Games. Il suffit tout simplement d'entrer la région et le nom du joueur. (tagLine : EUW1 (EUROPE) | gameName : Hide on bush).
+
+### Exemple de réponse
+
+```
+{
+    'puuid': 'IQI3rmA2gADOiwM8k-W1PArp5weKeMlvb2tvVm90d9H46wssfzUg41yugo0xHaMNnzT7mRcBdZOtOw',
+    'gameName': '110011000',
+    'tagLine': 'EUW'
+}
+```
+
+Après obtention du PUUID d'un joueur, nous pourrons obtenir la liste des matches qui ont été jouées par ce joueur. Tout cela se déroulera dans la partie [MATCH-V5](https://developer.riotgames.com/apis#match-v5), plus précisément sur l'endpoint **/lol/match/v5/matches/by-puuid/{puuid}/ids** (Get a list of match ids by puuid). En lui donnant le PUUID et si on le souhaite, donner quelques information supplémentaire (startTime, endTime, queue, type, etc.) pour filtrer plus précisément les parties qu'on recherche. Après avoir exécuté cette requête, nous allons recevoir une réponse sous forme de liste et cette liste contiendra un ensemble d'IDs des matches historique.
+
+### Exemple de réponse
+
+```
+['EUW1_7190251636', 'EUW1_7190200489', 'EUW1_7189712542', 'EUW1_7189666927', 'EUW1_7188989524', 'EUW1_6935697613', 'EUW1_6867213169', 'EUW1_6867170534', 'EUW1_6739352762', 'EUW1_6620040608', 'EUW1_6619995521', 'EUW1_6619919736', 'EUW1_6618915653', 'EUW1_6618834724', 'EUW1_6611388498', 'EUW1_6611318612', 'EUW1_6611260350', 'EUW1_6606466582', 'EUW1_6606394171', 'EUW1_6606327223']
+```
+
+On peut désormer avoir toutes les informations concernant une partie à l'aide de la liste qu'on a obtenue précédemment. Nous sommes toujours dans la partie MATCH-V5. Rendons-nous sur l'endpoint **/lol/match/v5/matches/{matchId}** (Get a match by match id), puis on lui donne l'ID d'un match, par exemple 'EUW1_7190251636' en précisant la RÉGION.
+
+### Exemple de réponse
+
+```
+{
+    "metadata": {
+        "matchId": "EUW1_XXXXXXXXXX",
+        "participants": [PUUID1, PUUID2, ...]
+    },
+    "info": {
+        "gameInformation": "X1"
+        "participants": [
+            {
+                Player1
+
+                "summonerName": "X2",
+                "summonerID": X3
+                "KDA": "K/D/A",
+                "totalDamage": X4,
+                "spellCasts": X5,
+                "totalMinionsKilled": X6,
+                "wardPlaced": X7,
+                "win": False | True
+            },
+            {
+                Player2
+                ...
+            },
+            {
+                Player3
+                ...
+            },
+            
+            ...
+
+            {
+                Player10
+                ...
+            }
+        ]
+    },
+    "tournamentCode": ""
+}
+```
