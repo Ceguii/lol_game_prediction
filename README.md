@@ -110,3 +110,14 @@ On peut désormer avoir toutes les informations concernant une partie à l'aide 
     "tournamentCode": ""
 }
 ```
+
+Malheureuseument, Riot Games a limité les requêtes API à:
+
+- 20 requêtes toutes les 1 seconds(s)
+- 100 requêtes toutes les 2 minutes(s)
+
+Il existe d'autres endpoints mais nous allons pas l'utiliser dans ce projet.
+
+Voici tout ce qui est à savoir sur l'API de Riot Games et Leaguepedia.
+
+### Quantité de données à récuperer pour ce projet
