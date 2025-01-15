@@ -57,14 +57,13 @@ def get_puuid(riot_id: str, tagline: str) -> str:
         # Effectuer la requête HTTP
         response = requests.get(url, headers=headers)
         
-        # Appel à la fonction auxiliaire pour gérer les erreurs de statut
         handle_api_error(response)
         
-        # Retourner le PUUID si la requête est réussie
+        print(response.json())
+
         return response.json()["puuid"]
     
     except requests.exceptions.RequestException as e:
-        # Capturer les erreurs de requêtes HTTP (p. ex. problèmes de réseau, DNS, timeout)
         raise Exception(f"Une erreur est survenue lors de la requête HTTP : {str(e)}")
 
 
@@ -78,14 +77,11 @@ def get_list_match_of_user(puuid: str) -> List[str]:
         # Effectuer la requête
         response = requests.get(url, headers=headers)
         
-        # Appel à la fonction auxiliaire pour gérer les erreurs
         handle_api_error(response)
         
-        # Si la requête réussit, retourner les données JSON
         return response.json()
     
     except requests.exceptions.RequestException as e:
-        # Capturer les erreurs liées à la requête HTTP (problèmes de réseau, etc.)
         raise Exception(f"Une erreur est survenue lors de la requête : {str(e)}")
     
     # Retourner une liste vide en cas d'erreur
