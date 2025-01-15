@@ -137,3 +137,19 @@ Dans l'idée, une requête nous permet de récuperer 1 partie. Si on fait le cal
 Les 72k parties que nous allons récuperer ne sera pas récuperé de façon au hasard. Dans League of Legends, il existe ce qu'on appelle "ELO". L'ELO determine les skills d'un joueur. Plus l'ELO d'un joueur est élevé, plus il est consideré bon/fort sur le jeu.
 
 Nous allons réaliser une distribution des ELO afin d'obtenir la répartition des parties que nous prévoyons de récupérer.
+
+### Web Scrapping
+
+Le but de cette partie sera de réaliser une distribution des ELO de League of Legends. Nous utiliserons le site [League of Graph](https://www.leagueofgraphs.com/) pour réaliser cette tâche. Le but sera d'utiliser la méthode du Web Scrapping pour récuperer les données qu'on veut à l'aide du package python **BeautifulSoup**. Le principe du Web Scrapping est de parser la page HTML du site, localiser les données dont on a besoin et de les stockers dans une base de donnée ou un fichier csv.
+
+Le notebook du web scrapping sera dans le dossier **notebook/web_scrapping/web_scrapping.ipynb**.
+
+La première étape était de récuperer les données que nous avons besoin. Après réalisation de cette première étape, on stock les données brute obtenue dans le dossier **data/raw/elo_distribution_data.csv**.
+
+La deuxième étape est de faire du preprocessing des données. Le but étant de nettoyer les données, supprimer et/ou ajouter des valeurs manquantes etc. Les données nettoyées sont stocké dans le dossier **data/processed/clear_elo_distribution_data.csv**.
+
+### Graphe de la distribution des rangs
+
+Le graphe de la distribution des rangs en 2025 pour toutes régions confondu (EUW, NA, KR, etc.).
+
+![Texte alternatif](reports/visualisations/distribution_elo.png)
