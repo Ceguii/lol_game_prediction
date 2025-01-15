@@ -1,3 +1,9 @@
 # python packages
 requests
 python-dotenv
+beautifulsoup4
+pandas
+numpy
+matplotlib 
+seaborn
+selenium==4.12.0
