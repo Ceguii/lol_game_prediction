@@ -45,6 +45,12 @@ Le site [Riot Games](https://developer.riotgames.com/apis) offre un API avec dif
 
 Après avoir crée notre compte riot, on devra générer un API key dans la partie espace personnel pour qu'on puisse enfin réaliser des requêtes.
 
+À quoi correspond une requête ? Une requête est une demande unique à l'API, que ce soit pour :
+
+- Récupérer les détails d'un seul match.
+- Obtenir la liste d'IDs de matches pour un joueur.
+- Consulter les informations de base sur un joueur (GET /lol/summoner/v4/summoners/by-name/{summonerName}).
+
 Nous allons tout d'abord se concentrer sur le [ACCOUNT-V1](https://developer.riotgames.com/apis), plus précisément sur l'endpoint **/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}** (Get account by riot id). Cette endpoint nous permettra d'obtenir un PUUID (Player Universally Unique Identifier), c'est un identifiant unique et universel attribué à chaque joueur de Riot Games. Il suffit tout simplement d'entrer la région et le nom du joueur. (tagLine : EUW1 (EUROPE) | gameName : Hide on bush).
 
 ### Exemple de réponse
@@ -116,8 +122,18 @@ Malheureuseument, Riot Games a limité les requêtes API à:
 - 20 requêtes toutes les 1 seconds(s)
 - 100 requêtes toutes les 2 minutes(s)
 
+L'API Riot Games impose ces limites pour éviter les abus, appelées **rate limits**.
+
 Il existe d'autres endpoints mais nous allons pas l'utiliser dans ce projet.
 
 Voici tout ce qui est à savoir sur l'API de Riot Games et Leaguepedia.
 
 ### Quantité de données à récuperer pour ce projet
+
+L'idéal est de récuperer 100 000 parties. Malheureuseument, ça risque d'être compliqué dans le sens ou on a le droit à 100 requêtes toutes les 2 minutes et notre API reste actif seulement 24h.
+
+Dans l'idée, une requête nous permet de récuperer 1 partie. Si on fait le calcule, on est à environ 3000 requêtes/heure, ça revient à 72 000 parties qu'on peut récuperer, soit 72 000 requêtes en 24h.
+
+Les 72k parties que nous allons récuperer ne sera pas récuperé de façon au hasard. Dans League of Legends, il existe ce qu'on appelle "ELO". L'ELO determine les skills d'un joueur. Plus l'ELO d'un joueur est élevé, plus il est consideré bon/fort sur le jeu.
+
+Nous allons réaliser une distribution des ELO afin d'obtenir la répartition des parties que nous prévoyons de récupérer.
