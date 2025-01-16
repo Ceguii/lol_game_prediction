@@ -157,3 +157,5 @@ Le graphe de la distribution des rangs en 2025 pour toutes régions confondu (EU
 On remarque que les personnes très haut elo sont très peu (seulement 2% des joueurs sont classé plus haut que Emerald). On voit aussi que la majorité des joueurs sont classé inférieur à Platine. La repartition des parties vont se baser sur cette distribution.
 
 ### Tableau
+
+(Afficher le tableau des proportions des matches selon les élos)
