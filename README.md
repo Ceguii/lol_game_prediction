@@ -160,3 +160,4 @@ On remarque que les personnes très haut elo sont très peu (seulement 2% des jo
 
 (Afficher le tableau des proportions des matches selon les élos)
 Calculer les proportions de games qu'on va prendre, faire des maths ext....
+Taff
