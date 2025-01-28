@@ -1,4 +1,8 @@
-from api_riot_games import *
+import os
+import sys
+import time
+import requests
+
 
 def handle_api_error(response: requests.Response) -> None:
     """ 

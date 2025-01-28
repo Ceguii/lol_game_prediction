@@ -1,8 +1,17 @@
-from api_riot_games import *
+import os
+import sys
+import requests
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+from typing import List
+from handle_api_error import handle_api_error
+from config import API_KEY, REGION, RIOT_ID, TAGLINE
+
+# Rank inférieur à Master
 
 def get_puuid(region: str, api: str, riot_id: str, tagline: str) -> str:
-    """Obtenir le PUUID à partir du Riot ID (Nom d'invocateur + Tag)."""
+    """Obtenir le PUUID à partir du Riot ID (Nom d'invocateur + Tag) RANK INFÉRIEUR À DIAMAND"""
     
     url = f"https://{region}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{riot_id}/{tagline}"
     headers = {"X-Riot-Token": api}
@@ -19,8 +28,10 @@ def get_puuid(region: str, api: str, riot_id: str, tagline: str) -> str:
 
 
 def get_list_match_of_user(region: str, api: str, puuid: str) -> List[str]:
-    """ Récupérer les IDs des matchs d'un joueur """
+    """ Récupérer les IDs des matchs d'un joueur à partir d'un PUUID """
     
+    # /!\ Changer le nombre de count à 100
+    # Pour l'instant count est à 20 pour le teste
     url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=20&api_key={api}"
     headers = {"X-Riot-Token": api}
     
