@@ -6,7 +6,7 @@ import requests
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from typing import List
-from api_data_fetcher import get_list_match_of_user
+from api_data_fetcher import get_list_match_of_user, get_matchs_details_from_matchID
 from handle_api_error import handle_api_error
 from config import API_KEY, TAGLINE, REGION
 
@@ -55,7 +55,7 @@ def get_puuid_from_summonerID(tagline: str, api: str, summonerID: str):
 def main() -> None:
     
     try:
-        # Get all challenger summonerID in json format
+        """ # Get all challenger summonerID in json format
         json_str = get_challenger_summonID(TAGLINE, API_KEY)
         
         # Parser this json to a list of summonerIDs
@@ -64,9 +64,6 @@ def main() -> None:
         
         # List of puuid of each summonerIDs
         puuids = [get_puuid_from_summonerID(TAGLINE, API_KEY, summonerID) for summonerID in summonerIDs]
-        
-        """ for summonerID in summonerIDs:
-            puuids.append(get_puuid_from_summonerID(TAGLINE, API_KEY, summonerID)) """
         
         print("/============================/")
         print("/== Affichage des puuids ==/\n")
@@ -78,9 +75,15 @@ def main() -> None:
         
         # Modifier l'url sur le COUNT, pour l'instant COUNT=20
         matchIDs = [get_list_match_of_user(REGION, API_KEY, puuid) for puuid in puuids]
-        print(matchIDs)
+        print(matchIDs) """
         
         print("/============================/")
+        
+        # Test avec un matchID et on recuperer le match details avec la fonction
+        # get_matchs_details_from_matchID
+        match_ID = "EUW1_7284848894"
+        match_details = get_matchs_details_from_matchID(REGION, match_ID, API_KEY)
+        print(match_details)
         
         
     except Exception as e:

@@ -46,3 +46,18 @@ def get_list_match_of_user(region: str, api: str, puuid: str) -> List[str]:
     
     # Retourner une liste vide en cas d'erreur
     return []
+
+def get_matchs_details_from_matchID(region: str, matchID: str, api: str):
+    """  """
+    
+    url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/{matchID}?api_key={api}"
+    headers = {"X-Riot-Token": api}
+    
+    try:
+        # Effectuer la requête
+        response = requests.get(url, headers=headers)
+        handle_api_error(response)
+        return response.json()
+    
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Une erreur est survenue lors de la requête : {str(e)}")
