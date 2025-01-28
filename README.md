@@ -198,6 +198,7 @@ Nous allons se concentrer dans notre région, c'est-à-dire l'Europe (EUW1).
 
 ## Les parties
 
-Sur League of Legends, il existe plus mode de jeux, notamment les ARAMs, les parties normales, les parties classés et selon les évevements quelques modes de jeux sympa comme URF, 6v6 etc.
+Sur League of Legends, il existe plusieurs mode de jeux, notamment les ARAMs, les parties normales, les parties classés et selon les évevements quelques modes de jeux sympa comme URF, 6v6 etc.
 Dans ce projet, nous allons plus nous focaliser sur les parties classés. C'est généralement dans ces parties là ou les joueurs ont tendance à tryhard pour gagner de l'ELO.
 
+## Obtenir les données 

@@ -1,3 +1,9 @@
+""" 
+
+    FICHIER MAIN POUR TESTER ET PRENDRE CONNAISSANCE DE L'API RIOT GAMES
+
+"""
+
 import requests
 import os
 import time
@@ -90,13 +96,36 @@ def get_list_match_of_user(puuid: str) -> List[str]:
 def main() -> None:
     
     # Obtenir le PUUID à partir du Riot ID et du Tagline
-    puuid = get_puuid(RIOT_ID, TAGLINE)
+    """ puuid = get_puuid(RIOT_ID, TAGLINE)
     print("/=====================/")
     print(f"PUUID : {puuid}")
     print("/=====================/")
     list_match_ids = get_list_match_of_user(puuid)
-    print(list_match_ids)
-
+    print(list_match_ids) """
+    
+    student = {
+        "no": 1020,
+        "name": "Mike Taylor",
+        "age": [
+            {
+                "caca": "crotte",
+                "pipi": "liquide"
+            },
+            {
+                "caca": "cailloux",
+                "pipi": "eau"
+            },
+            {
+                "caca": "cailloux",
+                "pipi": "eau"
+            }
+        ]
+    }
+    
+    #print(student['age'][0]['caca'])
+    
+    print(len(student.get("age")))
+    
 if __name__ == "__main__":
     
     main()
