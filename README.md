@@ -157,13 +157,31 @@ D'après un article du [Monde](https://www.lemonde.fr/culture/article/2024/10/23
 
 On remarque que les personnes très haut elo sont très peu (seulement 2% des joueurs sont classé plus haut que Emerald). On voit aussi que la majorité des joueurs sont classé inférieur à Platine. La repartition des parties vont se baser sur cette distribution.
 
-### Tableau
+### Tableau data
 
 Comme dit precédemment, nous récolterons environs 72 000 parties. D'après la distribution qu'on a obtenue, nous allons faire quelques calcules pour savoir le nombre de parties qu'on va prendre selon le poucentage montrer par la distribution.
 Par exemple pour la rang de Gold, nous avons réalisé le calcule suivant : 
 
 total_partie * (pourcentage_joueur_elo / 100) = 72000 * (14 / 100) = 10 080
 
+Voici le tableau complet :
+
 |   | Challenger | GrandMaster | Master | Diamond | Emerald | Platinium | Gold | Silver | Bronze | Iron
 | ------------- |:-------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Nombres de parties | 720 | 720 | 720 | 1440 | 4320 | 7200 | 10080 | 14400 | 14400 | 19440 |
+
+L'API officielle de Riot Games permet de récupérer des informations sur les parties d'un joueur via l'endpoint Match-V5.
+Cependant, il y a une limite concernant la quantité de données que nous pouvons obtenir.
+L'endpoint **/match/v5/matches/by-puuid/{puuid}/ids** permet de récupérer une liste d'IDs de parties pour un joueur donné (identifié par son PUUID, un identifiant unique).
+Cette requête renvoie un maximum de 100 matchs par joueur.
+
+Si on prend l'exemple du rang de Challenger, on doit récuperer 720 parties, mais l'API de Riot Games nous empêche de récuperer autant.
+Nous allons donc prendre plusieurs joueurs de ce rang et faire la somme des parties de chaque joueurs qui sera égale à 720.
+
+Dans le cas de Challenger, nous allons prendre 8 joueurs de ce rang et on recupérera 90 parties par joueur.
+
+Voici le tableau complet :
+
+|   | Challenger | GrandMaster | Master | Diamond | Emerald | Platinium | Gold | Silver | Bronze | Iron
+| ------------- |:-------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Nombres de joueur | 8 | 8 | 8 | 15 | 45 | 72 | 105 | 144 | 144 | 194 |
