@@ -168,7 +168,7 @@ Voici le tableau complet :
 
 |   | Challenger | GrandMaster | Master | Diamond | Emerald | Platinium | Gold | Silver | Bronze | Iron
 | ------------- |:-------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Nombres de parties | 720 | 720 | 720 | 1440 | 4320 | 7200 | 10080 | 14400 | 14400 | 19440 |
+| Nombres de parties | 720 | 720 | 720 | 1 440 | 4 320 | 7 200 | 10 080 | 14 400 | 14 400 | 19 440 |
 
 L'API officielle de Riot Games permet de récupérer des informations sur les parties d'un joueur via l'endpoint Match-V5.
 Cependant, il y a une limite concernant la quantité de données que nous pouvons obtenir.
@@ -184,4 +184,20 @@ Voici le tableau complet :
 
 |   | Challenger | GrandMaster | Master | Diamond | Emerald | Platinium | Gold | Silver | Bronze | Iron
 | ------------- |:-------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Nombres de joueur | 8 | 8 | 8 | 15 | 45 | 72 | 105 | 144 | 144 | 194 |
+| Nombres de joueurs | 8 | 8 | 8 | 15 | 45 | 72 | 105 | 144 | 144 | 194 |
+| Nombres de parties | 720 | 720 | 720 | 1 440 | 4 320 | 7 200 | 10 080 | 14 400 | 14 400 | 19 440 |
+
+Nous allons arrondir les parties qu'on va récuperer, ce qui nous donne ce tableau final:
+
+|   | Challenger | GrandMaster | Master | Diamond | Emerald | Platinium | Gold | Silver | Bronze | Iron | Total |
+| ------------- |:-------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Nombres de joueurs | 8 | 8 | 8 | 14 | 40 | 72 | 100 | 140 | 140 | 190 | 720 |
+| Nombres de parties | 800 | 800 | 800 | 1 400 | 4 000 | 7 200 | 10 000 | 14 000 | 14 000 | 19 000 | 72 000|
+
+Nous allons se concentrer dans notre région, c'est-à-dire l'Europe (EUW1).
+
+## Les parties
+
+Sur League of Legends, il existe plus mode de jeux, notamment les ARAMs, les parties normales, les parties classés et selon les évevements quelques modes de jeux sympa comme URF, 6v6 etc.
+Dans ce projet, nous allons plus nous focaliser sur les parties classés. C'est généralement dans ces parties là ou les joueurs ont tendance à tryhard pour gagner de l'ELO.
+
