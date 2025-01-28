@@ -151,6 +151,7 @@ La deuxième étape est de faire du preprocessing des données. Le but étant de
 ### Graphe de la distribution des rangs
 
 Le graphe de la distribution des rangs en 2025 pour toutes régions confondu (EUW, NA, KR, etc.).
+D'après un article du [Monde](https://www.lemonde.fr/culture/article/2024/10/23/la-banque-postale-coupe-de-france-de-league-of-legends-sur-france-tv-quand-france-televisions-se-met-a-l-heure-de-l-e-sport_6358476_3246.html?utm_source=chatgpt.com) datant d'octobre 2024, mentionne que League of Legends compte plus de 150 millions de joueurs dans le monde.
 
 ![Texte alternatif](reports/visualisations/distribution_elo.png)
 
