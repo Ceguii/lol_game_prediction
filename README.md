@@ -159,5 +159,11 @@ On remarque que les personnes très haut elo sont très peu (seulement 2% des jo
 
 ### Tableau
 
-(Afficher le tableau des proportions des matches selon les élos)
-Calculer les proportions de games qu'on va prendre, faire des maths ext....
+Comme dit precédemment, nous récolterons environs 72 000 parties. D'après la distribution qu'on a obtenue, nous allons faire quelques calcules pour savoir le nombre de parties qu'on va prendre selon le poucentage montrer par la distribution.
+Par exemple pour la rang de Gold, nous avons réalisé le calcule suivant : 
+
+total_partie * (pourcentage_joueur_elo / 100) = 72000 * (14 / 100) = 10 080
+
+|   | Challenger | GrandMaster | Master | Diamond | Emerald | Platinium | Gold | Silver | Bronze | Iron
+| ------------- |:-------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Nombres de parties | 720 | 720 | 720 | 1440 | 4320 | 7200 | 10080 | 14400 | 14400 | 19440 |
