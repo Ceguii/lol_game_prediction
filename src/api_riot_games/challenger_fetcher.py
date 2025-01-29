@@ -1,12 +1,13 @@
 import os
 import sys
+import time
 import random
 import requests
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from typing import List
-from api_data_fetcher import get_list_match_of_user, get_matchs_details_from_matchID
+from api_data_fetcher import get_list_match_of_user, get_matchs_details_from_matchID, create_and_add_json_element
 from handle_api_error import handle_api_error
 from config import API_KEY, TAGLINE, REGION
 
@@ -55,36 +56,55 @@ def get_puuid_from_summonerID(tagline: str, api: str, summonerID: str):
 def main() -> None:
     
     try:
-        """ # Get all challenger summonerID in json format
+        print("\n/============================/")
+        print("=== PIPELINE CHALLENGER DATA ===")
+        print("/============================/\n")
+        time.sleep(1)
+        
+        print("/============================/")
+        print("=== Obtenir les summonerIDs de toute les challengers ===")
+        print("/============================/\n")
+        # Get all challenger summonerID in json format
         json_str = get_challenger_summonID(TAGLINE, API_KEY)
+        time.sleep(1)
         
         # Parser this json to a list of summonerIDs
         summonerIDs = parse_json_challenger(json_str)
-        print("La taille de la liste summonerIDs : ", len(summonerIDs))
+        #print("La taille de la liste summonerIDs : ", len(summonerIDs))
+        
+        print("/============================/")
+        print("/=== Affichage des puuids ===/")
+        print("/============================/\n")
         
         # List of puuid of each summonerIDs
+        # On sélectionne 8 joueurs au hasard
         puuids = [get_puuid_from_summonerID(TAGLINE, API_KEY, summonerID) for summonerID in summonerIDs]
-        
-        print("/============================/")
-        print("/== Affichage des puuids ==/\n")
-        
-        print(puuids)
+        #print(puuids)
             
         print("/============================/")
-        print("/== Affichage des listes de matchesID par puuid ==/\n")
+        print("/=== Création du fichier JSON stockant toutes les parties challenger ===")
+        print("/============================/\n")
         
         # Modifier l'url sur le COUNT, pour l'instant COUNT=20
-        matchIDs = [get_list_match_of_user(REGION, API_KEY, puuid) for puuid in puuids]
-        print(matchIDs) """
+        # /!\ Vu qu'on a selectionné 8 joueurs, chaque joueur aura 100 parties.
+        # soit un total de 800 parties
+        # Liste de liste : [[matchIDs], [""]]
+        list_of_matchIDs = [get_list_match_of_user(REGION, API_KEY, puuid) for puuid in puuids]
+        #print(matchIDs)
         
         print("/============================/")
+        print("=== Récupération des matches sous format JSON ===")
+        print("/============================/\n")
         
         # Test avec un matchID et on recuperer le match details avec la fonction
         # get_matchs_details_from_matchID
-        match_ID = "EUW1_7284848894"
-        match_details = get_matchs_details_from_matchID(REGION, match_ID, API_KEY)
-        print(match_details)
         
+        for matchIDs in list_of_matchIDs:
+            for matchID in matchIDs:
+                create_and_add_json_element("challenger_games.json", matchID)
+            
+        print("/=== PIPELINE CHALLENGER TERMINER ===/")
+        print("/=== FICHIER challenger_games.json ENREGISTRÉ\n")
         
     except Exception as e:
         print(f"Erreur dans la pipeline: {e}")

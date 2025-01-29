@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import requests
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
@@ -8,7 +9,23 @@ from typing import List
 from handle_api_error import handle_api_error
 from config import API_KEY, REGION, RIOT_ID, TAGLINE
 
-# Rank inférieur à Master
+## Fonctions générales pour les API Riot Games
+
+def create_and_add_json_element(file_name: str, elt: dict) -> None:
+    # Charger les données existantes
+    try:
+        with open("../../data/raw/" + file_name, 'r') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = []  # Si le fichier n'existe pas, on crée une nouvelle liste vide
+
+    # Ajouter le nouvel élément (match details à partir du matchID)
+    data.append(get_matchs_details_from_matchID(REGION, elt, API_KEY))
+
+    # Sauvegarder les données dans le fichier JSON
+    with open("../../data/raw/" + file_name, 'w') as f:
+        json.dump(data, f, indent=4)
+        
 
 def get_puuid(region: str, api: str, riot_id: str, tagline: str) -> str:
     """Obtenir le PUUID à partir du Riot ID (Nom d'invocateur + Tag) RANK INFÉRIEUR À DIAMAND"""
