@@ -202,3 +202,5 @@ Sur League of Legends, il existe plusieurs mode de jeux, notamment les ARAMs, le
 Dans ce projet, nous allons plus nous focaliser sur les parties classés. C'est généralement dans ces parties là ou les joueurs ont tendance à tryhard pour gagner de l'ELO.
 
 ## Obtenir les données 
+
+Réalisation d'un pipeline pour récuperer les données via l'API de Riot Games. 
