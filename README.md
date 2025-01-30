@@ -203,4 +203,4 @@ Dans ce projet, nous allons plus nous focaliser sur les parties classés. C'est 
 
 ## Obtenir les données 
 
-Réalisation d'un pipeline pour récuperer les données via l'API de Riot Games. 
+Réalisation d'un pipeline pour récuperer les données via l'API de Riot Games. Toutes les fonctions dans le dossier api_riot_games et api_fetcher
