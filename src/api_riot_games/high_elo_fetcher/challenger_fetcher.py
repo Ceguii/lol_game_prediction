@@ -4,10 +4,10 @@ import time
 import random
 import requests
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from typing import List
-from api_data_fetcher import get_list_match_of_user, get_matchs_details_from_matchID, create_and_add_json_element
+from api_data_fetcher import get_list_match_of_user, create_and_add_json_element
 from handle_api_error import handle_api_error
 from config import API_KEY, TAGLINE, REGION
 
@@ -54,6 +54,9 @@ def get_puuid_from_summonerID(tagline: str, api: str, summonerID: str):
         raise Exception(f"Une erreur est survenue lors de la requête HTTP : {str(e)}")
     
 def main() -> None:
+    
+    # PIPELINE TESTE : VALIDÉ
+    # À METTRE LE CODE PLUS TARD DANS LE FICHIER PIPELINE.PY
     
     try:
         print("\n/============================/")
@@ -130,6 +133,8 @@ def main() -> None:
             
         print("/=== PIPELINE CHALLENGER TERMINER ===/")
         print("/=== FICHIER challenger_games.json ENREGISTRÉ\n")
+        
+        # Fichier challenger_games.json fait 25Mo, ce qui n'est pas trop énorme...
         
     except Exception as e:
         print(f"Erreur dans la pipeline: {e}")
