@@ -96,14 +96,14 @@ def get_list_match_of_user(puuid: str) -> List[str]:
 def main() -> None:
     
     # Obtenir le PUUID à partir du Riot ID et du Tagline
-    """ puuid = get_puuid(RIOT_ID, TAGLINE)
+    puuid = get_puuid(RIOT_ID, TAGLINE)
     print("/=====================/")
     print(f"PUUID : {puuid}")
     print("/=====================/")
     list_match_ids = get_list_match_of_user(puuid)
-    print(list_match_ids) """
+    print(list_match_ids)
     
-    student = {
+    """ student = {
         "no": 1020,
         "name": "Mike Taylor",
         "age": [
@@ -124,7 +124,7 @@ def main() -> None:
     
     #print(student['age'][0]['caca'])
     
-    print(len(student.get("age")))
+    print(len(student.get("age"))) """
     
 if __name__ == "__main__":
     
