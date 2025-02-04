@@ -22,4 +22,5 @@ def parse_json_summoner_ID_low_elo(json_format_player: List[Dict[str, Any]]) -> 
     for i in range(len(json_format_player)):
         result_list.append(json_format_player[i]['summonerId'])
         
-    return result_list
+    # Test avec 8 joueurs
+    return random.sample(result_list, 8)

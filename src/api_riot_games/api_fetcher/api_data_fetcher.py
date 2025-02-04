@@ -50,10 +50,9 @@ def get_puuid_from_summoner_ID(tagline: str, api: str, summonerID: str) -> str:
     
     try:
         response = requests.get(url, headers=headers)
-        print(response.json())
+        #print(response.json())
         ## Trouver une solution pour ne pas rate limit
         # À voir...
-        time.sleep(0.2)
         return response.json()['puuid']
     
     except requests.exceptions.RequestException as e:
