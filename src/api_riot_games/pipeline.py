@@ -233,12 +233,42 @@ def pipeline() -> None:
     
     try:
         
-        # Test à petite échelle...
+        print("TEST")
         
-        challenger()
-        grand_master()
-        diamond()
+        json_format_player = rate_limited_request(
+            get_summoner_ID, TAGLINE, API_KEY, High_Rank.CHALLENGER.value, Queue_games.RANKED_SOLO.value
+        )  
         
+        summonerIDs = parse_json_summoner_ID(json_format_player)
+        
+        
+        puuids = [
+            rate_limited_request(get_puuid_from_summoner_ID, TAGLINE, API_KEY, summonerID)
+            for summonerID in summonerIDs
+        ]
+        
+        list_of_matchIDs = [
+            rate_limited_request(get_list_match_of_user, REGION, API_KEY, puuid)
+            for puuid in puuids
+        ]
+            
+        print(f"Total de joueurs : {len(list_of_matchIDs)}")
+        print(f"Total de matche par joueur : {len(list_of_matchIDs[0])}\n")
+            
+        start_time = time.time()
+            
+        for i in range(len(list_of_matchIDs)):
+            print(f"-- Obtention des parties du joueur {i + 1} en cours... --")
+                
+            for matchID in list_of_matchIDs[i]:
+                rate_limited_request(create_and_add_json_element, "challenger.json", matchID, REGION, API_KEY)
+                
+            print(f"-- Obtention des parties du joueur {i + 1} terminé --\n")
+                
+        end_time = time.time()
+            
+        print(f"Le temps d'exécution {High_Rank.CHALLENGER.name} a pris : {end_time - start_time:.2f} secondes")
+            
         
     except Exception as e:
         print(f"Erreur dans la pipeline: {e}")

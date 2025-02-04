@@ -69,7 +69,7 @@ def create_and_add_json_element(file_name: str, elt: dict, region: str, api: str
         data = []  # Si le fichier n'existe pas, on crée une nouvelle liste vide
 
     # Ajouter le nouvel élément (match details à partir du matchID)
-    data.append(get_matchs_details_from_match_ID(region, elt, api))
+    data.append(get_matchs_details_from_match_ID_timeline(region, elt, api))
 
     # Sauvegarder les données dans le fichier JSON
     with open("../../data/raw/" + file_name, 'w') as f:
@@ -105,6 +105,22 @@ def get_matchs_details_from_match_ID(region: str, matchID: str, api: str) -> Lis
     
     try:
         # Effectuer la requête
+        response = requests.get(url, headers=headers)
+        handle_api_error(response)
+        return response.json()
+    
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Une erreur est survenue lors de la requête : {str(e)}")
+    
+def get_matchs_details_from_match_ID_timeline(region: str, matchID: str, api: str) -> List[Dict[str, Any]]:
+    
+    url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/{matchID}/timeline?api_key={api}"
+    
+    headers = {
+        "X-Riot-Token": api
+    }
+    
+    try:
         response = requests.get(url, headers=headers)
         handle_api_error(response)
         return response.json()
