@@ -3,9 +3,15 @@ import time
 from config import API_KEY, REGION, TAGLINE
 
 from api_fetcher.enum_rank import High_Rank, Queue_games, Rank
-from api_fetcher.api_data_fetcher import get_summoner_ID, get_puuid_from_summoner_ID, create_and_add_json_element, get_list_match_of_user, get_summoner_ID_low_elo, get_puuid_from_summoner_ID
+from api_fetcher.api_data_fetcher import get_summoner_ID, get_puuid_from_summoner_ID, create_and_add_json_element, get_list_match_of_user, get_summoner_ID_low_elo, get_puuid_from_summoner_ID, get_matchs_details_from_match_ID_timeline
 from api_fetcher.parse_json import parse_json_summoner_ID, parse_json_summoner_ID_low_elo
 from api_fetcher.rate_limiter import rate_limited_request
+from database_utils import create_database, create_matches_table, insert_data_into_db
+
+
+""" /=============================================================================/ """
+""" /=============================================================================/ """
+""" /=============================================================================/ """
 
 def challenger() -> None:
     
@@ -228,6 +234,13 @@ def diamond() -> None:
 
     print("/=== PIPELINE DIAMOND TERMINÉ ===/")
     print("/=== FICHIER diamand.json ENREGISTRÉ ===/\n")
+    
+    
+""" /=============================================================================/ """
+""" /=============================================================================/ """
+""" /=============================================================================/ """    
+    
+    
 
 def pipeline() -> None:
     
@@ -235,17 +248,27 @@ def pipeline() -> None:
         
         print("TEST")
         
+        create_database()  # Crée la base de données si elle n'existe pas
+        create_matches_table()  # Crée la table `matches` dans `lol_db`
+        
+        print("\nRécupération du JSON stockant le SUMMONER_ID\n")
+        
         json_format_player = rate_limited_request(
             get_summoner_ID, TAGLINE, API_KEY, High_Rank.CHALLENGER.value, Queue_games.RANKED_SOLO.value
         )  
         
+        print("\nParse le JSON et stock les SUMMONER_IDs dans une liste\n")
+        
         summonerIDs = parse_json_summoner_ID(json_format_player)
         
+        print("\nRécupération du PUUIDS de chaque joueur\n")
         
         puuids = [
             rate_limited_request(get_puuid_from_summoner_ID, TAGLINE, API_KEY, summonerID)
             for summonerID in summonerIDs
         ]
+        
+        print("\nRécupération d'une liste de X matchesIDs pour chaque PUUID\n")
         
         list_of_matchIDs = [
             rate_limited_request(get_list_match_of_user, REGION, API_KEY, puuid)
@@ -261,7 +284,7 @@ def pipeline() -> None:
             print(f"-- Obtention des parties du joueur {i + 1} en cours... --")
                 
             for matchID in list_of_matchIDs[i]:
-                rate_limited_request(create_and_add_json_element, "challenger.json", matchID, REGION, API_KEY)
+                rate_limited_request(insert_data_into_db, matchID, High_Rank.CHALLENGER.name, get_matchs_details_from_match_ID_timeline(REGION, matchID, API_KEY))
                 
             print(f"-- Obtention des parties du joueur {i + 1} terminé --\n")
                 
