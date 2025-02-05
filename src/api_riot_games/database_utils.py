@@ -2,6 +2,7 @@ from typing import Any, Dict
 import psycopg2
 from psycopg2 import sql
 import os
+import json
 from config import DB_CONFIG
 
 
@@ -57,7 +58,7 @@ def create_matches_table() -> None:
         if conn:
             conn.close()
             
-def insert_data_into_db(match_id, rank, json_data) -> None:
+def insert_data_into_db_not_valid(match_id, rank, json_data) -> None:
     """Insère les données dans la table 'matches'."""
     conn = None
     try:
@@ -83,6 +84,38 @@ def insert_data_into_db(match_id, rank, json_data) -> None:
     finally:
         if conn:
             conn.close()
+            
+
+def insert_data_into_db(match_id, rank, json_data) -> None:
+    """Insère les données dans la table 'matches'."""
+    conn = None
+    try:
+        # Connexion à `lol_db`
+        conn = psycopg2.connect(**DB_CONFIG, database="lol_db")  
+        cursor = conn.cursor()
+
+        # Convertir json_data en chaîne JSON avant de l'insérer
+        json_data_str = json.dumps(json_data)
+
+        # Préparer la requête d'insertion
+        insert_query = """
+        INSERT INTO matches (match_id, rank, json_data) 
+        VALUES (%s, %s, %s)
+        ON CONFLICT (match_id) DO NOTHING;  -- Si le match_id existe déjà, ne rien faire.
+        """
+        
+        # Exécuter la requête d'insertion avec les valeurs fournies
+        cursor.execute(insert_query, (match_id, rank, json_data_str))
+        conn.commit()
+        print(f"Données insérées pour le match {match_id} avec succès !")
+
+        cursor.close()
+    except Exception as e:
+        print(f"Erreur lors de l'insertion des données : {e}")
+    finally:
+        if conn:
+            conn.close()
+
 
 if __name__ == "__main__":
     
