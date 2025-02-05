@@ -7,3 +7,4 @@ numpy
 matplotlib 
 seaborn
 selenium==4.12.0
+psycopg2
